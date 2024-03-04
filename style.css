@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+
+  :root {
+    --branco: #fdf0d5;
+    --azul: #669bbc;
+    --azul2: #003049;
+    --azul3: #caf0f8;
+    --vermelho: #c1121f;
+    --vermelho2: #780000;
+  }
+
+body {
+    background-color: var(--azul3);
+}
+
+header {
+    font-family: "Anta", sans-serif;;
+    background-color: var(--azul2);
+    color: var(--branco);
+    border-bottom: 5px var(--azul) groove;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove {
+    margin: 0px 15px;
+}
+
+#inputDiv {
+    font-family: "Anta", sans-serif;
+    background-color: var(--azul);
+    color: var(--branco);
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#inputDiv label {
+    margin-top: 1rem;
+    font-size: large;
+}
+
+#inputDiv input {
+    margin: 1rem;
+}
+
+#inputDiv button {
+    font-family: "Anta", sans-serif;
+    margin: 1rem;
+    border: 2px var(--branco) groove;
+    padding: 5px;
+    color: var(--branco);
+    background-color: var(--azul2);
+}
+
+#list {
+    overflow:auto;
+    height: 50vh;
+    width: 60vw;
+    border: 3px black solid;
+    font-family: "Anta", sans-serif;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+#list li {
+    margin: 10px;
+    text-decoration: none;
+}
+
+.listNotDone {
+    margin: 10px;
+    text-decoration: none;
+}
+
+.listDone {
+    margin: 10px;
+    text-decoration: line-through;
+}
+
+#listDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tarefasPendentes {
+    width: 100vw;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
