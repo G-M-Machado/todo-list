@@ -1,76 +1,67 @@
 function createCheckbox() {
     var checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.classList.add("boxcheck")
+    checkbox.classList.add("boxcheck");
     return checkbox;
 }
 
 function createRemoveButton() {
     var button = document.createElement('button');
-    button.textContent = 'X';
-    button.classList.add("remove")
-    button.innerHTML = "<i class='bx bxs-trash'></i>"
+    button.classList.add("remove");
+    button.innerHTML = "<i class='bx bxs-trash bx-sm'></i>";
     return button;
 }
 
-
-//Cria o item na lisa, com checkbox, botão para remover o texto do input
 function createListItem(text, checked) {
     var li = document.createElement('li');
+    li.classList.add("listItem");
     var checkbox = createCheckbox();
-    checkbox.checked = checked; 
+    checkbox.checked = checked;
     li.appendChild(checkbox);
+    var textNode = document.createTextNode(text);
+    li.appendChild(textNode);
     var button = createRemoveButton();
-    button.addEventListener('click', function() { //funcionalidade do botão de remover tarefa
-        if (confirm('Deseja excluir este item?')) { // confirmação do usuario para remover tarefa
-            li.parentNode.removeChild(li); //removendo tarefa da lista
-            removeTask(text); //removendo tarefa do localStorage
-            contagemList(); //executa função de contagem ao remover uma tarefa
+    button.addEventListener('click', function() {
+        if (confirm('Deseja excluir este item?')) {
+            li.parentNode.removeChild(li);
+            removeTask(text);
+            listLenght();
         }
     });
     li.appendChild(button);
-    var textNode = document.createTextNode(text);
-    li.appendChild(textNode);
     checkbox.addEventListener('change', function() {
         if (checkbox.checked) {
-            textNode.parentNode.style.textDecoration = "line-through"; //Estilização em tarefa concluída
-            markTask(text, true); //marca tarefa como concluida
+            textNode.parentNode.style.textDecoration = "line-through";
+            markTask(text, true);
         } else {
-            textNode.parentNode.style.textDecoration = "none"; //retorna estilização para não conluída
-            markTask(text, false); //retorna para o status de não concluída
+            textNode.parentNode.style.textDecoration = "none";
+            markTask(text, false);
         }
     });
-    contagemList(); //executa função de contagem ao adcionar nova tarefa
-    return li; //retorna o item li criado
+    listLenght();
+    return li;
 }
 
-
-//Funcionalide do botão para adcionar nova tarefa
 document.getElementById('button').addEventListener('click', function() {
     var ul = document.getElementById('list');
-    var input = 
-        document.getElementById('AddTarefa');
-        if (input.value.length >= 1) {
-            ul.appendChild(createListItem(input.value, false)); //Cria a tarefa através do input, com valor de conclusão false
-            addTask(input.value); //Adiciona a tarefa no localStorage
-            input.value = ''; //limpa o campo input
-        } else { 
-            alert("Insira uma tarefa")
-        }
-    } 
-);
+    var input = document.getElementById('addTarefa');
+    if (input.value.length >= 1) {
+        ul.appendChild(createListItem(input.value, false));
+        addTask(input.value);
+        input.value = '';
+    } else {
+        alert("Insira uma tarefa");
+    }
+});
 
-setInterval(contagemList, 1); //atualiza a contagem de tarefas total
+setInterval(listLenght, 1);
 
-
-//Function para contagem da lista
-function contagemList() {
-    let lista = document.querySelector("#list");
-    let ListaContagem = lista.querySelectorAll('li').length;
-    document.querySelector('#contagem').textContent = ListaContagem;
+function listLenght() {
+    let list = document.querySelector("#list");
+    let listLenght = list.querySelectorAll('li').length;
+    document.querySelector('#contagem').textContent = listLenght;
 }
 
-//Function para pegar as tarefas do localStorage
 function getTasks() {
     var tasks = localStorage.getItem('tarefas');
     if (tasks) {
@@ -80,14 +71,12 @@ function getTasks() {
     }
 }
 
-// function para adcionar a nova tarefa no localStorage
 function addTask(text) {
     var tasks = getTasks();
     tasks.push({text: text, completed: false});
     localStorage.setItem('tarefas', JSON.stringify(tasks));
 }
 
-//function para marcar a tarefa como concluida no localStorage
 function markTask(text, state) {
     var tasks = getTasks();
     for (var i = 0; i < tasks.length; i++) {
@@ -99,7 +88,6 @@ function markTask(text, state) {
     localStorage.setItem('tarefas', JSON.stringify(tasks));
 }
 
-//function para remover a tarefa do localStorage
 function removeTask(text) {
     var tasks = getTasks();
     for (var i = 0; i < tasks.length; i++) {
@@ -111,11 +99,24 @@ function removeTask(text) {
     localStorage.setItem('tarefas', JSON.stringify(tasks));
 }
 
-//Carrega a lista do localStorage junto da página
+function completedCheck() {
+    let completed = document.querySelectorAll('.boxcheck');
+    let textNode = document.querySelectorAll('li');
+
+    for (let i = 0; i < completed.length; i++) {
+        if (completed[i].checked) {
+            textNode[i].style.textDecoration = "line-through";
+        } else {
+            textNode[i].style.textDecoration = "none";
+        }
+    }
+}
+
 window.addEventListener('load', function() {
     var tasks = getTasks();
     var ul = document.getElementById('list');
     for (var i = 0; i < tasks.length; i++) {
-        ul.appendChild(createListItem(tasks[i].text, tasks[i].completed)); //Cria a lista de tarefas com texto e status de conclusão e as exibe na ul
+        ul.appendChild(createListItem(tasks[i].text, tasks[i].completed));
+        completedCheck();
     }
 });
