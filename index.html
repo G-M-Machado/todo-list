@@ -18,13 +18,15 @@
 <body>
     <main>
         <div id="inputDiv">
-            <label for="input">Registrar atividade pendente: </label>
+            <label for="addTarefa">Registrar atividade pendente: </label>
             <textarea id="addTarefa" type="text" placeholder="Descreva sua pendência" maxlength="50"></textarea>
             <button id="button">Adicionar</button>
         </div>
         <div id="tarefasPendentes">
-            <p>Tarefas pendentes: </p>
-            <p id="contagem"></p>
+            <div id="contagemTarefas">
+                <p>Tarefas pendentes: </p>
+                <p id="contagem"></p>
+            </div>
         </div>
         <div id="listDiv">
             <ul id="list">       
