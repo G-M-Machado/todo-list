@@ -49,8 +49,11 @@ header {
     font-size: large;
 }
 
-#inputDiv input {
+#addTarefa {
+    width: 50%;
     margin: 1rem;
+    padding-top: 0.3rem;
+    text-align: center;
 }
 
 #inputDiv button {
@@ -75,9 +78,45 @@ header {
     justify-content: start;
 }
 
-#list li {
-    margin: 10px;
+.listItem {
+    background-color: white;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    width: 90%;
+    height: 3rem;
+    margin: 1rem;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.listItem input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.listItem text {
+    width: 80%;
+    height: fit-content;
+    padding: 5px;
+    font-family: "Anta", sans-serif;
+    text-align: start;
+}
+
+.listItem button {
+    margin-left: auto;
+    border: 1px var(--vermelho) solid;
+    border-radius: 50%;
+    padding: 0.2rem;
+    align-items: end;
+    cursor: pointer;
+}
+
+.listItem button:hover {
+    margin-left: auto;
+    border: 2px var(--vermelho) solid;
+    border-radius: 50%;
+    padding: 0.3rem;
+    align-items: end;
 }
 
 .listNotDone {
