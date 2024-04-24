@@ -63,7 +63,7 @@ function listLenght() {
 }
 
 function getTasks() {
-    var tasks = localStorage.getItem('tarefas');
+    var tasks = localStorage.getItem('tasks');
     if (tasks) {
         return JSON.parse(tasks);
     } else {
@@ -74,7 +74,7 @@ function getTasks() {
 function addTask(text) {
     var tasks = getTasks();
     tasks.push({text: text, completed: false});
-    localStorage.setItem('tarefas', JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function markTask(text, state) {
@@ -85,7 +85,7 @@ function markTask(text, state) {
             break;
         }
     }
-    localStorage.setItem('tarefas', JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function removeTask(text) {
@@ -96,7 +96,7 @@ function removeTask(text) {
             break;
         }
     }
-    localStorage.setItem('tarefas', JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function completedCheck() {
