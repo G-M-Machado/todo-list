@@ -44,7 +44,7 @@ function createListItem(text, checked) {
 
 document.getElementById('button').addEventListener('click', function() {
     var ul = document.getElementById('list');
-    var input = document.getElementById('addTarefa');
+    var input = document.getElementById('addTask');
     if (input.value.length >= 1) {
         ul.appendChild(createListItem(input.value, false));
         addTask(input.value);
@@ -59,7 +59,7 @@ setInterval(listLenght, 1);
 function listLenght() {
     let list = document.querySelector("#list");
     let listLenght = list.querySelectorAll('li').length;
-    document.querySelector('#contagem').textContent = listLenght;
+    document.querySelector('#count').textContent = listLenght;
 }
 
 function getTasks() {
